@@ -898,14 +898,20 @@ typedef NS_ENUM(NSUInteger, SlideSelectType) {
     if (self.allowTakePhoto && !configuration.sortAscending) {
         index = indexPath.row - 1;
     }
-    ZLPhotoModel *model = self.arrDataSources[index];
-    
-    if ([self shouldDirectEdit:model]) return;
-    
-    UIViewController *vc = [self getMatchVCWithModel:model];
-    if (vc) {
-        [self showViewController:vc sender:nil];
-    }
+    if (configuration.disableTapPreview && [[collectionView cellForItemAtIndexPath:indexPath] isKindOfClass:[ZLCollectionCell class]]) {
+        // liuming edit start
+        ZLCollectionCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+        [cell btnSelectClick:nil];
+        // liuming edit end
+    }else{
+        ZLPhotoModel *model = self.arrDataSources[index];
+        if ([self shouldDirectEdit:model]) return;
+
+        UIViewController *vc = [self getMatchVCWithModel:model];
+        if (vc) {
+            [self showViewController:vc sender:nil];
+        }
+     }
 }
 
 - (BOOL)shouldDirectEdit:(ZLPhotoModel *)model

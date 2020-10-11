@@ -70,6 +70,8 @@ iOSInjectionProject/
 
 Carthage/Build
 Carthage/Checkouts
+Carthage
+.DS_Store
 
 
 # End of https://www.gitignore.io/api/cocoapods,objective-c

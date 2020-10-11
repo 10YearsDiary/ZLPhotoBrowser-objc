@@ -146,7 +146,18 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [ZLPhotoManager getPhotoAblumList:configuration.allowSelectVideo allowSelectImage:configuration.allowSelectImage complete:^(NSArray<ZLAlbumListModel *> *albums) {
             @zl_strongify(self);
-            self.arrayDataSources = [NSMutableArray arrayWithArray:albums];
+            NSMutableArray* list = [NSMutableArray arrayWithArray:albums];
+            if (configuration.extraAlblums) {
+                for (NSDictionary* albumConfig in configuration.extraAlblums) {
+                    NSString* title = [albumConfig objectForKey:@"title"];
+                    NSString* options = [albumConfig objectForKey:@"options"];
+                    PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsWithOptions:options];
+                    // collection参数没有什么传的 2020.10.10 liuming
+                    ZLAlbumListModel *m = [ZLPhotoManager getAlbumModeWithTitle:title result:assets collection:nil option:options allowSelectVideo:configuration.allowSelectVideo allowSelectImage:configuration.allowSelectImage];
+                    [list insertObject:m atIndex:1];
+                }
+            }
+            self.arrayDataSources = [NSMutableArray arrayWithArray:list];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });

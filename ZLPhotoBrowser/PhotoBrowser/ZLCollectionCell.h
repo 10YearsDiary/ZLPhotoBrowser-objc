@@ -35,6 +35,8 @@
 
 @property (nonatomic, copy) void (^selectedBlock)(BOOL);
 
+- (void)btnSelectClick:(UIButton *)sender;
+
 @end
 
 

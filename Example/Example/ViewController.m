@@ -137,6 +137,12 @@
     actionSheet.configuration.shouldAnialysisAsset = self.allowAnialysisAssetSwitch.isOn;
     //框架语言
     actionSheet.configuration.languageType = self.languageSegment.selectedSegmentIndex;
+//    PHFetchOptions *options = [[PHFetchOptions alloc] init];
+//                NSDate* date = [NSDate date];
+//                options.predicate = [NSPredicate predicateWithFormat:@"creationDate <= %@ and creationDate >= %@", [date dateByAddingTimeInterval:86400], date];
+//                options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+//        
+//        actionSheet.configuration.extraAlblums = @[@{@"title":@"Today", @"options":options}];
     //自定义多语言
     //    actionSheet.configuration.customLanguageKeyValue = @{@"ZLPhotoBrowserCameraText": @"没错，我就是一个相机"};
     //自定义图片

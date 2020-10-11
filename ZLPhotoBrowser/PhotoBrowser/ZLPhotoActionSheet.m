@@ -889,6 +889,13 @@ double const ScalePhotoWidth = 1000;
     }
     
     ZLPhotoModel *model = self.arrDataSources[indexPath.row];
+    if (self.configuration.disableTapPreview && [[collectionView cellForItemAtIndexPath:indexPath] isKindOfClass:[ZLCollectionCell class]]) {
+        // liuming edit start
+        ZLCollectionCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+        [cell btnSelectClick:nil];
+        // liuming edit end
+        return;
+    }
     
     if ([self shouldDirectEdit:model]) return;
     

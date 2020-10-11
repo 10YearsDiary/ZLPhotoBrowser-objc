@@ -36,13 +36,15 @@
     @zl_weakify(self);
     
     self.identifier = model.headImageAsset.localIdentifier;
-    [ZLPhotoManager requestImageForAsset:model.headImageAsset size:CGSizeMake(GetViewHeight(self)*2.5, GetViewHeight(self)*2.5) progressHandler:nil completion:^(UIImage *image, NSDictionary *info) {
-        @zl_strongify(self);
-        
-        if ([self.identifier isEqualToString:model.headImageAsset.localIdentifier]) {
-            self.headImageView.image = image?:GetImageWithName(@"zl_defaultphoto");
-        }
-    }];
+    if(model.headImageAsset){
+        [ZLPhotoManager requestImageForAsset:model.headImageAsset size:CGSizeMake(GetViewHeight(self)*2.5, GetViewHeight(self)*2.5) progressHandler:nil completion:^(UIImage *image, NSDictionary *info) {
+            @zl_strongify(self);
+            
+            if ([self.identifier isEqualToString:model.headImageAsset.localIdentifier]) {
+                self.headImageView.image = image?:GetImageWithName(@"zl_defaultphoto");
+            }
+        }];
+    }
     
     self.labTitle.text = model.title;
     self.labCount.text = [NSString stringWithFormat:@"(%ld)", model.count];

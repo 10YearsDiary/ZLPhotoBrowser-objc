@@ -255,6 +255,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)haveMicrophoneAuthority;
 
+//获取相册列表model
++ (ZLAlbumListModel *)getAlbumModeWithTitle:(NSString *)title result:(PHFetchResult<PHAsset *> *)result collection:(PHAssetCollection *)collection option:(PHFetchOptions *)option allowSelectVideo:(BOOL)allowSelectVideo allowSelectImage:(BOOL)allowSelectImage;
+
 @end
 
 NS_ASSUME_NONNULL_END

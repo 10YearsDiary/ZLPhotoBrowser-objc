@@ -300,4 +300,11 @@
  */
 @property (nonatomic, assign) ZLExportVideoType exportVideoType;
 
+/**
+  [{"title":"", "options": PHFetchOptions }]
+ */
+@property (nonatomic, strong) NSArray<NSDictionary*>* extraAlblums;
+
+@property (nonatomic, assign) BOOL disableTapPreview;
+
 @end
